@@ -10,15 +10,15 @@ extern UART_HandleTypeDef huart1;
 
 uint8_t Flag = 0; 
 int Pressure = 0;
-int Time_1 = 600;   //Á½¶Ë³öÆø
-int Time_2 = 600;   //Á½¶ËÎüÆø
-int Time_3 = 1000;   //ÖĞ¼ä¶Î³öÎüÆø
+int Time_1 = 600;   //ä¸¤ç«¯å‡ºæ°”
+int Time_2 = 600;   //ä¸¤ç«¯å¸æ°”
+int Time_3 = 1000;   //ä¸­é—´æ®µå‡ºå¸æ°”
 
-int Time_4 = 2000;   //×ÜÑÓÊ±
+int Time_4 = 2000;   //æ€»å»¶æ—¶
 
-uint16_t ADC_Value;  //ADCÖµ
-int Pwm_1 = 1500;   //ÖĞ¼ä¶Îpwm
-int Pwm_2 = 3000;    //Á½¶Ëpwm
+uint16_t ADC_Value;  //ADCå€¼
+int Pwm_1 = 1500;   //ä¸­é—´æ®µpwm
+int Pwm_2 = 3000;    //ä¸¤ç«¯pwm
 
 float Pressure_V=0.0;
 long pressure=0;
@@ -26,10 +26,10 @@ long pressure=0;
 char V_disbuff[5]={0}; 
 char P_disbuff[6]={0};
  
-const float VCC =3300;         // ADC²Î¿¼µçÑ¹ÎªmV
+const float VCC =3300;         // ADCå‚è€ƒç”µå‹ä¸ºmV
  
-const float Voltage_0 =160;    // ÁãµãµçÑ¹ÖµmV  Ğ£×¼Ê±ĞèĞŞ¸Ä
-const float Voltage_40 =3750 ; // ÂúÁ¿³ÌÊä³öµçÑ¹ÖµmV  ĞèĞŞ¸Ä
+const float Voltage_0 =160;    // é›¶ç‚¹ç”µå‹å€¼mV  æ ¡å‡†æ—¶éœ€ä¿®æ”¹
+const float Voltage_40 =3750 ; // æ»¡é‡ç¨‹è¾“å‡ºç”µå‹å€¼mV  éœ€ä¿®æ”¹
 
 long map(long x, long in_min, long in_max, long out_min, long out_max) 
 {
@@ -53,20 +53,20 @@ float Pressure_Calculate(ADC_HandleTypeDef *hadc,uint8_t times)
 	uint32_t temp_val = 0;
 	float pressure = 0;
 	temp_val = Get_Adc_Average(hadc,times);
-	pressure=((float)temp_val-1810.0)*5/77;//100kPaµÄÑ¹Á¦´«¸ĞÆ÷
+	pressure=((float)temp_val-1810.0)*5/77;//100kPaçš„å‹åŠ›ä¼ æ„Ÿå™¨
 	return pressure;
 }
 
 //void BEND_Value_Conversion()
 //{
-//		/*ÏÔÊ¾µçÑ¹Öµ*/
+//		/*æ˜¾ç¤ºç”µå‹å€¼*/
 //		V_disbuff[0]=(long int)(Pressure_V)/1000+'0';
 //		V_disbuff[1]=(long int)(Pressure_V)%1000/100+'0';	
 //		V_disbuff[2]=(long int)(Pressure_V)%100/10+'0';
 //		V_disbuff[3]=(long int)(Pressure_V)%10+'0';	
 //	  OLED_ShowStr(36,2,V_disbuff,2);
 //	
-//    /*ÏÔÊ¾ÆøÑ¹Öµ*/
+//    /*æ˜¾ç¤ºæ°”å‹å€¼*/
 //		if(pressure<=0){pressure=0;}
 //		if(pressure>=40000){pressure=40000;}
 //		
@@ -82,7 +82,7 @@ void Run_on_off(uint8_t mode)
 {
 	if(mode == 1)
 	{
-//		Body_MotionStatus(0,1,1);     //¿ØÖÆ³öÆøÎüÆø
+//		Body_MotionStatus(0,1,1);     //æ§åˆ¶å‡ºæ°”å¸æ°”
 //		Body_Status(1,1500,1,1500,1,1500);
 //		HAL_Delay(Time_3);
 //		Body_Status(0,0,0,0,0,0);
@@ -133,8 +133,8 @@ void Run_on_off(uint8_t mode)
 
 void Run(uint8_t mode)
 {
-		HAL_ADC_Start(&hadc1);     //Æô¶¯ADC×ª»»
-		HAL_ADC_PollForConversion(&hadc1, 50);   //µÈ´ı×ª»»Íê³É£¬50Îª×î´óµÈ´ıÊ±¼ä£¬µ¥Î»Îªms
+		HAL_ADC_Start(&hadc1);     //å¯åŠ¨ADCè½¬æ¢
+		HAL_ADC_PollForConversion(&hadc1, 50);   //ç­‰å¾…è½¬æ¢å®Œæˆï¼Œ50ä¸ºæœ€å¤§ç­‰å¾…æ—¶é—´ï¼Œå•ä½ä¸ºms
 	
 		if(HAL_IS_BIT_SET(HAL_ADC_GetState(&hadc1), HAL_ADC_STATE_REG_EOC))
 		{
@@ -154,7 +154,7 @@ void Run(uint8_t mode)
 		{
 			if(Flag == 1)
 			{
-				Minipump1_MotionStatus(1);   //Ğ¡1³öÆøÎü¸½
+				Minipump1_MotionStatus(1);   //å°1å‡ºæ°”å¸é™„
 				Minipump1_Status(1,Pwm_2);
 				HAL_Delay(Time_1);
 				Minipump1_Status(0,0);
@@ -162,37 +162,37 @@ void Run(uint8_t mode)
 								
 				Flag = 0;
 			}
-			Body_MotionStatus(0,1,1);    //´ó1ÊÕËõ ´ó2´ó3ÉìÕ¹
+			Body_MotionStatus(0,1,1);    //å¤§1æ”¶ç¼© å¤§2å¤§3ä¼¸å±•
 			Body_Status(1,Pwm_1,1,Pwm_1,1,1700);
 			HAL_Delay(Time_3);
 			Body_Status(0,0,0,0,0,0);
 			HAL_Delay(Time_4);
 			
-			Minipump2_MotionStatus(1);   //Ğ¡2³öÆøÎü¸½
+			Minipump2_MotionStatus(1);   //å°2å‡ºæ°”å¸é™„
 			Minipump2_Status(1,Pwm_2);
 			HAL_Delay(Time_1);
 			Minipump2_Status(0,0);
 			HAL_Delay(Time_4);
 			
-			Minipump1_MotionStatus(0);     //Ğ¡1ÎüÆøÍÑÀë
+			Minipump1_MotionStatus(0);     //å°1å¸æ°”è„±ç¦»
 			Minipump1_Status(1,Pwm_2);
 			HAL_Delay(Time_2);
 			Minipump1_Status(0,0);
 			HAL_Delay(Time_4);
 			
-			Body_MotionStatus(1,0,0);      //´ó1ÉìÕ¹  ´ó2´ó3ÊÕËõ
+			Body_MotionStatus(1,0,0);      //å¤§1ä¼¸å±•  å¤§2å¤§3æ”¶ç¼©
 			Body_Status(1,Pwm_1,1,Pwm_1,1,Pwm_1);
 			HAL_Delay(Time_3);
 			Body_Status(0,0,0,0,0,0);
 			HAL_Delay(Time_4);
 			
-			Minipump1_MotionStatus(1);         //Ğ¡1³öÆøÎü¸½
+			Minipump1_MotionStatus(1);         //å°1å‡ºæ°”å¸é™„
 			Minipump1_Status(1,Pwm_2);
 			HAL_Delay(Time_1);
 			Minipump1_Status(0,0);
 			HAL_Delay(Time_4);
 			
-			Minipump2_MotionStatus(0);          //Ğ¡2ÎüÆøÍÑÀë
+			Minipump2_MotionStatus(0);          //å°2å¸æ°”è„±ç¦»
 			Minipump2_Status(1,Pwm_2);
 			HAL_Delay(Time_2);
 			Minipump2_Status(0,0);

@@ -1,7 +1,14 @@
 #include "main.h"
 #include "relay.h"
 
-void Body_MotionStatus(uint8_t status1,uint8_t status2,uint8_t status3)  //SET����  1    RESET����   0   
+
+/**
+ * @brief  身体气泵吸放气状态(电磁阀)
+ * @param  status1 SET出气  1    RESET吸气   0   
+ * @param  status2 SET出气  1    RESET吸气   0   
+ * @param  status3 SET出气  1    RESET吸气   0   
+ */
+void Body_MotionStatus(uint8_t status1,uint8_t status2,uint8_t status3)  //SET出气  1    RESET吸气   0   
 {
 	if(status1 == 1)
 	{
@@ -32,6 +39,10 @@ void Body_MotionStatus(uint8_t status1,uint8_t status2,uint8_t status3)  //SET��
 				
 }
 
+/**
+ * @brief  头部气泵吸放气状态
+ * @param  status SET出气  1    RESET吸气   0   
+ */
 void Minipump1_MotionStatus(uint8_t status)     
 {
 	if(status == 1)
@@ -44,6 +55,10 @@ void Minipump1_MotionStatus(uint8_t status)
 	}			
 }
 
+/**
+ * @brief  尾部气泵吸放气状态
+ * @param  status SET出气  1    RESET吸气   0   
+ */
 void Minipump2_MotionStatus(uint8_t status)     
 {
 	if(status == 1)

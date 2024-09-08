@@ -33,9 +33,9 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 extern UART_HandleTypeDef huart1;
-uint8_t RX_BUF[64]={0};  	//»º´æÊı×é
-uint8_t RX_count=0;      	//¼ÆÊıÎ»
-uint8_t RX_temp;        //»º´æ×Ö·û
+uint8_t RX_BUF[64]={0};  	//ç¼“å­˜æ•°ç»„
+uint8_t RX_count=0;      	//è®¡æ•°ä½
+uint8_t RX_temp;        //ç¼“å­˜å­—ç¬¦
 uint8_t mode = 0;
 /* USER CODE END PTD */
 
@@ -100,7 +100,7 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 	HAL_UART_Receive_IT(&huart1,&RX_temp,1);
-	HAL_ADCEx_Calibration_Start(&hadc1);    //ADĞ£×¼
+	HAL_ADCEx_Calibration_Start(&hadc1);    //ADæ ¡å‡†
   HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);

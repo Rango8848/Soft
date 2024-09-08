@@ -2,6 +2,11 @@
 #include "motor.h"
 #include "tim.h"
 
+/**
+ * @brief  身体弯曲控制
+ * @param  status1: 1:正转 0:停止
+ * @param  duty1: 占空比
+ */
 void Body_Status(uint8_t status1,int duty1,uint8_t status2,int duty2,uint8_t status3,int duty3)    
 {
 	if(status1 == 0)
@@ -9,7 +14,7 @@ void Body_Status(uint8_t status1,int duty1,uint8_t status2,int duty2,uint8_t sta
 		HAL_GPIO_WritePin(IN2_1_GPIO_Port,IN2_1_Pin,GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(IN2_2_GPIO_Port,IN2_2_Pin,GPIO_PIN_RESET);
 	}
-	else if(status1 == 1)   //��ת
+	else if(status1 == 1)   //正转
 	{
 		HAL_GPIO_WritePin(IN2_1_GPIO_Port,IN2_1_Pin,GPIO_PIN_SET);
 		HAL_GPIO_WritePin(IN2_2_GPIO_Port,IN2_2_Pin,GPIO_PIN_RESET);
@@ -45,6 +50,11 @@ void Body_Status(uint8_t status1,int duty1,uint8_t status2,int duty2,uint8_t sta
 
 }
 
+/**
+ * @brief  头泵控制
+ * @param  status: 1:开启 0:停止
+ * @param  duty: 占空比
+ */
 void Minipump1_Status(uint8_t status,int duty)
 {
 		if(status == 0)
@@ -62,6 +72,11 @@ void Minipump1_Status(uint8_t status,int duty)
 
 }
 
+/**
+ * @brief  尾泵控制
+ * @param  status: 1:开启 0:停止
+ * @param  duty: 占空比
+ */
 void Minipump2_Status(uint8_t status,int duty)
 {
 		if(status == 0)
