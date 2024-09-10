@@ -10,5 +10,5 @@ long map(long x, long in_min, long in_max, long out_min, long out_max);
 void BEND_Value_Conversion(void);
 uint16_t Get_Adc_Average(ADC_HandleTypeDef *hadc,uint8_t times);
 void Test(uint8_t mode);
-
+void Test_Li(uint8_t mode);
 #endif

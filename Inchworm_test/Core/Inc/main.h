@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.h
-  * @brief          : Header for main.c file.
-  *                   This file contains the common defines of the application.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.h
+ * @brief          : Header for main.c file.
+ *                   This file contains the common defines of the application.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -23,34 +23,35 @@
 #define __MAIN_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+  /* Private includes ----------------------------------------------------------*/
+  /* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
+  /* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
+  /* Exported types ------------------------------------------------------------*/
+  /* USER CODE BEGIN ET */
 
-/* USER CODE END ET */
+  /* USER CODE END ET */
 
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
+  /* Exported constants --------------------------------------------------------*/
+  /* USER CODE BEGIN EC */
 
-/* USER CODE END EC */
+  /* USER CODE END EC */
 
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
+  /* Exported macro ------------------------------------------------------------*/
+  /* USER CODE BEGIN EM */
 
-/* USER CODE END EM */
+  /* USER CODE END EM */
 
-/* Exported functions prototypes ---------------------------------------------*/
-void Error_Handler(void);
+  /* Exported functions prototypes ---------------------------------------------*/
+  void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
@@ -89,8 +90,28 @@ void Error_Handler(void);
 #define IN3_2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+#define test_head_and_tail_mode 1
+#define test_body_mode 2
+#define test_one_step_mode 3
+#define test_continue_step_mode 4
+#define test_body_keep_mode 5
+#define test_head_and_tail_keep_mode 6
+#define test_continue_step_with_keep_K_mode 7
 
-/* USER CODE END Private defines */
+#define test_which_mode 1
+
+#define Head_And_Tail_PumpOut_Time_ms 600 // 两端出气时间,毫秒
+#define Head_And_Tail_PumpIn_Time_ms 600  // 两端吸气时间,毫秒
+#define Head_And_Tail_Pump_Strength 3500  // 两端气泵速度(0到4999之间)
+
+#define Body_PumpInOrOut_Time_ms 1000 // 中间段出吸气时间,毫秒
+#define Body_Pump_Strength 1500       // 中间段气泵速度(0到4999之间)
+
+#define Between_Two_Action_Delay_Time_ms 2000 // 两次动作之间的延时时间,毫秒
+
+#define body_keep_K 0.001          // 抵消漏气系数,与本次出气吸气强度相乘，得出抵消强度
+#define head_and_tail_keep_K 0.001 // 抵消漏气系数,与本次出气吸气强度相乘，得出抵消强度
+  /* USER CODE END Private defines */
 
 #ifdef __cplusplus
 }
